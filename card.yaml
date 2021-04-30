@@ -1,0 +1,69 @@
+card:
+  cards:
+    - entity: sensor.lywsdcgq_001_temperature
+      type: 'custom:button-card'
+      show_icon: true
+      name: |
+        [[[
+          return Number(entity.state).toFixed() + `°C`;
+        ]]]
+      show_last_changed: true
+      styles:
+        icon:
+          - width: var(--sensor-icon-width)
+          - color: var(--sidebar-icon-color)
+        name:
+          - color: |
+              [[[
+                if (entity.state <= 21) return 'var(--state-info)';
+                if (entity.state > 21 && entity.state <= 25) return 'var(--state-success)'
+                else return 'var(--state-danger)';
+              ]]]
+          - font-size: var(--sensor-name-font-size)
+          - padding: var(--sensor-name-padding)
+        label:
+          - color: var(--secondary-text-color)
+          - font-size: var(--sensor-name-font-size)
+          - padding: var(--sensor-name-padding)
+    - entity: sensor.lywsdcgq_001_humidity
+      type: 'custom:button-card'
+      show_icon: true
+      name: |
+        [[[
+          return Number(entity.state).toFixed() + `%`;
+        ]]]
+      show_last_changed: true
+      styles:
+        icon:
+          - width: var(--sensor-icon-width)
+          - color: var(--sidebar-icon-color)
+        name:
+          - color: |
+              [[[
+                if (entity.state < 40) return 'var(--state-danger)';
+                if (entity.state >= 40 && entity.state < 60) return 'var(--state-success)'
+                else return 'var(--text-primary-color)';
+              ]]]
+          - font-size: var(--sensor-name-font-size)
+          - padding: var(--sensor-name-padding)
+        label:
+          - color: var(--secondary-text-color)
+          - font-size: var(--sensor-name-font-size)
+          - padding: var(--sensor-name-padding)
+    - entity: sensor.time
+      type: 'custom:button-card'
+      name: |
+        [[[
+          return ``;
+        ]]]
+      show_icon: false
+      styles:
+        card:
+          - background: transparent
+  type: horizontal-stack
+style: |
+  ha-card {
+    --paper-card-background-color: transparent;
+    --ha-card-box-shadow: none;
+  }
+type: 'custom:mod-card'
